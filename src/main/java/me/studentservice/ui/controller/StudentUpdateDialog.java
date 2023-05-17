@@ -12,13 +12,13 @@ import me.studentservice.model.SchoolClass;
 import me.studentservice.model.Student;
 import me.studentservice.utils.SQLUtils;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class StudentInputDialog extends Dialog<Student> implements Initializable {
+public class StudentUpdateDialog extends Dialog<Student> implements Initializable {
 
 	@FXML
 	private TextField address;
@@ -44,9 +44,11 @@ public class StudentInputDialog extends Dialog<Student> implements Initializable
 	private ButtonType submitButtonType;
 
 	SQLUtils sqlUtils;
+	Student student;
 
-	public StudentInputDialog(Window window) {
+	public StudentUpdateDialog(Window window, Student student) {
 		try {
+			this.student = student;
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/studentservice/ui/fxml/Insert.fxml"));
 			loader.setController(this);
 			DialogPane root = loader.load();
@@ -54,26 +56,24 @@ public class StudentInputDialog extends Dialog<Student> implements Initializable
 			initOwner(window);
 			initModality(Modality.APPLICATION_MODAL);
 			setResizable(false);
-			setTitle("Add Student");
+			setTitle("Update Student");
 			setDialogPane(root);
 			setResizable(false);
 			setResultConverter(buttonType -> {
 				if(!ButtonBar.ButtonData.OK_DONE.equals(buttonType.getButtonData())) {
 					return null;
 				}
-				return new Student(
-						getMaxId(),
-						schoolClass.getSelectionModel().getSelectedItem().getId(),
-						name.getText(),
-						surname.getText(),
-						gender.getValue(),
-						birthDate.getValue().toString(),
-						address.getText(),
-						father.getText(),
-						mother.getText(),
-						gpa.getText(),
-						previousGpa.getText()
-				);
+				student.setClassId(schoolClass.getSelectionModel().getSelectedItem().getId());
+				student.setName(name.getText());
+				student.setSurname(surname.getText());
+				student.setGender(gender.getValue());
+				student.setBirthDate(birthDate.getValue().toString());
+				student.setAddress(address.getText());
+				student.setFather(father.getText());
+				student.setMother(mother.getText());
+				student.setGpa(gpa.getText());
+				student.setPreviousGpa(previousGpa.getText());
+				return student;
 			});
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -89,20 +89,23 @@ public class StudentInputDialog extends Dialog<Student> implements Initializable
 		gender.getSelectionModel().select(0);
 		sqlUtils = new SQLUtils();
 		initClass();
+		initFields();
 	}
 
-	private int getMaxId() {
-		try {
-			sqlUtils.connect();
-			ResultSet rs = sqlUtils.exequteSelectQuery("select max(STUDENT_ID) from student");
-			rs.next();
-			int id = rs.getInt(1) + 1;
-			System.out.println(id);
-			sqlUtils.disconnect();
-			return id;
-		} catch(SQLException se) {
-			se.printStackTrace();
-			return -1;
+	private void initFields() {
+		name.setText(student.getName());
+		surname.setText(student.getSurname());
+		gender.setValue(student.getGender());
+		birthDate.setValue(LocalDate.parse(student.getBirthDate()));
+		address.setText(student.getAddress());
+		father.setText(student.getFather());
+		mother.setText(student.getMother());
+		gpa.setText(student.getGpa());
+		previousGpa.setText(student.getPreviousGpa());
+		for(int i = 0; i < schoolClass.getItems().size(); i++) {
+			if(schoolClass.getItems().get(i).getId() == student.getClassId()) {
+				schoolClass.getSelectionModel().select(i);
+			}
 		}
 	}
 
@@ -112,11 +115,12 @@ public class StudentInputDialog extends Dialog<Student> implements Initializable
 			ResultSet rs = sqlUtils.exequteSelectQuery("select * from school_class");
 			ObservableList<SchoolClass> list = FXCollections.observableArrayList();
 			while(rs.next()) {
-				list.add(new SchoolClass(
+				SchoolClass temp = new SchoolClass(
 						rs.getInt(1),
 						rs.getInt(2),
 						rs.getString(3)
-				));
+				);
+				list.add(temp);
 			}
 			schoolClass.setItems(list);
 			schoolClass.getSelectionModel().select(0);

@@ -92,84 +92,30 @@ public class MainController implements Initializable {
 
 		address.setCellValueFactory(new PropertyValueFactory<>("address"));
 		address.setCellFactory(TextFieldTableCell.forTableColumn());
-		address.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setAddress(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_address = '" + student.getAddress() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		birthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
 		birthDate.setCellFactory(TextFieldTableCell.forTableColumn());
-		birthDate.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setBirthDate(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_birth_date = '" + student.getBirthDate() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		father.setCellValueFactory(new PropertyValueFactory<>("father"));
 		father.setCellFactory(TextFieldTableCell.forTableColumn());
-		father.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setFather(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_father = '" + student.getFather() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
 		gender.setCellFactory(TextFieldTableCell.forTableColumn());
-		gender.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setGender(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_gender = '" + student.getGender() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		gpa.setCellValueFactory(new PropertyValueFactory<>("gpa"));
 		gpa.setCellFactory(TextFieldTableCell.forTableColumn());
-		gpa.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setGpa(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_gpa = '" + student.getGpa() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		mother.setCellValueFactory(new PropertyValueFactory<>("mother"));
 		mother.setCellFactory(TextFieldTableCell.forTableColumn());
-		mother.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setMother(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_mother = '" + student.getMother() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));
 		name.setCellFactory(TextFieldTableCell.forTableColumn());
-		name.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setName(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_name = '" + student.getName() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		previousGpa.setCellValueFactory(new PropertyValueFactory<>("previousGpa"));
 		previousGpa.setCellFactory(TextFieldTableCell.forTableColumn());
-		previousGpa.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setPreviousGpa(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_previous_gpa = '" + student.getPreviousGpa() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
 		surname.setCellFactory(TextFieldTableCell.forTableColumn());
-		surname.setOnEditCommit(event -> {
-			TableStudentData student = event.getRowValue();
-			student.setSurname(event.getNewValue());
-			sqlUtils.executeQuery("update student set student_surname = '" + student.getSurname() + "' where student_id = " + student.getId() + ";");
-			updateTables();
-		});
 
 		homeroom.setCellValueFactory(new PropertyValueFactory<>("homeroom"));
 
@@ -356,12 +302,6 @@ public class MainController implements Initializable {
 					"where student_id = " + temp.getId() + ";");
 			updateTables();
 		}
-//		table.setEditable(!table.isEditable());
-//		if(table.isEditable()) {
-//			editButton.setTextFill(Color.GREEN);
-//			return;
-//		}
-//		editButton.setTextFill(Color.RED);
 	}
 
 }
