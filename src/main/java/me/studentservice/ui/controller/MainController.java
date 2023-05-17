@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -15,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import me.studentservice.model.SchoolClass;
 import me.studentservice.model.Student;
 import me.studentservice.model.Subject;
@@ -75,7 +73,15 @@ public class MainController implements Initializable {
 
 	@FXML
 	private void generateCertificate() {
-
+		if(table.getSelectionModel().getSelectedItem() == null) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Warning");
+			alert.setHeaderText("Nema učenika");
+			alert.setContentText("Molimo vas izaberite učenika");
+			alert.show();
+			return;
+		}
+		new CertificateController(new Stage(), table.getSelectionModel().getSelectedItem());
 	}
 
 	@Override
@@ -104,24 +110,66 @@ public class MainController implements Initializable {
 
 		father.setCellValueFactory(new PropertyValueFactory<>("father"));
 		father.setCellFactory(TextFieldTableCell.forTableColumn());
+		father.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setFather(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_father = '" + student.getFather() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
 		gender.setCellFactory(TextFieldTableCell.forTableColumn());
+		gender.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setGender(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_gender = '" + student.getGender() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		gpa.setCellValueFactory(new PropertyValueFactory<>("gpa"));
 		gpa.setCellFactory(TextFieldTableCell.forTableColumn());
+		gpa.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setGpa(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_gpa = '" + student.getGpa() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		mother.setCellValueFactory(new PropertyValueFactory<>("mother"));
 		mother.setCellFactory(TextFieldTableCell.forTableColumn());
+		mother.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setMother(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_mother = '" + student.getMother() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));
 		name.setCellFactory(TextFieldTableCell.forTableColumn());
+		name.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setName(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_name = '" + student.getName() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		previousGpa.setCellValueFactory(new PropertyValueFactory<>("previousGpa"));
 		previousGpa.setCellFactory(TextFieldTableCell.forTableColumn());
+		previousGpa.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setPreviousGpa(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_previous_gpa = '" + student.getPreviousGpa() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
 		surname.setCellFactory(TextFieldTableCell.forTableColumn());
+		surname.setOnEditCommit(event -> {
+			TableStudentData student = event.getRowValue();
+			student.setSurname(event.getNewValue());
+			sqlUtils.executeQuery("update student set student_surname = '" + student.getSurname() + "' where student_id = " + student.getId() + ";");
+			updateTables();
+		});
 
 		homeroom.setCellValueFactory(new PropertyValueFactory<>("homeroom"));
 
@@ -156,14 +204,8 @@ public class MainController implements Initializable {
 			se.printStackTrace();
 		}
 
-		classPicker.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-			genderPicker.getSelectionModel().select(4);
-			updateTables();
-		});
-		genderPicker.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-			classPicker.getSelectionModel().select(2);
-			updateTables();
-		});
+		classPicker.getSelectionModel().selectedItemProperty().addListener(observable -> updateTables());
+		genderPicker.getSelectionModel().selectedItemProperty().addListener(observable -> updateTables());
 	}
 
 	@FXML
@@ -176,15 +218,24 @@ public class MainController implements Initializable {
 	private void updateTables() {
 		try {
 			sqlUtils.connect();
-			ResultSet rs = sqlUtils.exequteSelectQuery("select STUDENT_ID, student.CLASS_ID, STUDENT_NAME, STUDENT_SURNAME, STUDENT_GENDER, STUDENT_BIRTH_DATE, STUDENT_ADDRESS, STUDENT_FATHER, STUDENT_MOTHER, STUDENT_GPA, STUDENT_PREVIOUS_GPA, TEACHER_NAME, CLASS_NAME\n" +
+			StringBuilder sql = new StringBuilder("select STUDENT_ID, student.CLASS_ID, STUDENT_NAME, STUDENT_SURNAME, STUDENT_GENDER, STUDENT_BIRTH_DATE, STUDENT_ADDRESS, STUDENT_FATHER, STUDENT_MOTHER, STUDENT_GPA, STUDENT_PREVIOUS_GPA, TEACHER_NAME, CLASS_NAME\n" +
 					"from student inner join school_class on student.CLASS_ID = school_class.CLASS_ID\n" +
-					"inner join homeroom_teacher on school_class.TEACHER_ID = homeroom_teacher.TEACHER_ID" +
-					(classPicker.getSelectionModel().getSelectedItem() == null ?
-							"" : (" where school_class.class_id = " + classPicker.getSelectionModel().getSelectedItem().getId())) +
-					(genderPicker.getSelectionModel().getSelectedItem().equals("") ?
-							"" : (" where student.student_gender = '" + genderPicker.getSelectionModel().getSelectedItem()) + "'") +
-					";"
-			);
+					"inner join homeroom_teacher on school_class.TEACHER_ID = homeroom_teacher.TEACHER_ID");
+			if(classPicker.getSelectionModel().getSelectedItem() != null || !genderPicker.getSelectionModel().getSelectedItem().equals("")) {
+				sql.append(" where ");
+				if(classPicker.getSelectionModel().getSelectedItem() != null) {
+					sql.append("school_class.class_id = ").append(classPicker.getSelectionModel().getSelectedItem().getId());
+				}
+				if(classPicker.getSelectionModel().getSelectedItem() != null && !genderPicker.getSelectionModel().getSelectedItem().equals("")) {
+					sql.append(" and ");
+				}
+				if(!genderPicker.getSelectionModel().getSelectedItem().equals("")) {
+					sql.append("student.student_gender = '").append(genderPicker.getSelectionModel().getSelectedItem()).append("'");
+				}
+			}
+			sql.append(";");
+			System.out.println(sql);
+			ResultSet rs = sqlUtils.exequteSelectQuery(sql.toString());
 			ObservableList<TableStudentData> list = FXCollections.observableArrayList();
 			while(rs.next()) {
 				list.add(new TableStudentData(
@@ -246,7 +297,7 @@ public class MainController implements Initializable {
 	private void insert() {
 		StudentInputDialog dialog = new StudentInputDialog(table.getScene().getWindow());
 		Optional<Student> optionalStudent = dialog.showAndWait();
-		if(!optionalStudent.isEmpty()) {
+		if(optionalStudent.isPresent()) {
 			Student student = optionalStudent.get();
 			sqlUtils.executeQuery("INSERT INTO student_service.student VALUES " +
 					"(" + student.getId() + ", " + student.getClassId() + ", '" + student.getName() +
@@ -259,12 +310,58 @@ public class MainController implements Initializable {
 
 	@FXML
 	private void update() {
-		table.setEditable(!table.isEditable());
-		if(table.isEditable()) {
-			editButton.setTextFill(Color.GREEN);
+		if(table.getSelectionModel().getSelectedItem() == null) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Warning");
+			alert.setHeaderText("Nema učenika");
+			alert.setContentText("Molimo vas izaberite učenika");
+			alert.show();
 			return;
 		}
-		editButton.setTextFill(Color.RED);
+		Student student = null;
+		try {
+			sqlUtils.connect();
+			ResultSet rs = sqlUtils.exequteSelectQuery("select * from student where student_id = " + table.getSelectionModel().getSelectedItem().getId() + ";");
+			rs.next();
+			student = new Student(
+					rs.getInt(1),
+					rs.getInt(2),
+					rs.getString(3),
+					rs.getString(4),
+					rs.getString(5),
+					rs.getString(6),
+					rs.getString(7),
+					rs.getString(8),
+					rs.getString(9),
+					rs.getString(10),
+					rs.getString(11)
+			);
+		} catch(SQLException se) {
+			se.printStackTrace();
+		}
+		StudentUpdateDialog dialog = new StudentUpdateDialog(table.getScene().getWindow(), student);
+		Optional<Student> optionalStudent = dialog.showAndWait();
+		if(optionalStudent.isPresent()) {
+			Student temp = optionalStudent.get();
+			sqlUtils.executeQuery("update student set class_id = " + temp.getClassId() + "\n" +
+					", student_name = '" + temp.getName() + "'\n" +
+					", student_surname = '" + temp.getSurname() + "'\n" +
+					", STUDENT_GENDER = '" + temp.getGender() + "'\n" +
+					", STUDENT_BIRTH_DATE = '" + temp.getBirthDate() + "'\n" +
+					", STUDENT_ADDRESS = '" + temp.getAddress() + "'\n" +
+					", STUDENT_FATHER = '" + temp.getFather() + "'\n" +
+					", STUDENT_MOTHER = '" + temp.getMother() + "'\n" +
+					", STUDENT_GPA = '" + temp.getGpa() + "'\n" +
+					", STUDENT_PREVIOUS_GPA = '" + temp.getPreviousGpa() + "'\n" +
+					"where student_id = " + temp.getId() + ";");
+			updateTables();
+		}
+//		table.setEditable(!table.isEditable());
+//		if(table.isEditable()) {
+//			editButton.setTextFill(Color.GREEN);
+//			return;
+//		}
+//		editButton.setTextFill(Color.RED);
 	}
 
 }
