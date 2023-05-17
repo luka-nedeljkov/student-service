@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import me.studentservice.model.SchoolClass;
 import me.studentservice.model.Student;
@@ -27,8 +26,6 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-	@FXML
-	private Button editButton;
 	@FXML
 	private TableColumn<TableStudentData, String> address;
 	@FXML
