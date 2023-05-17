@@ -1,6 +1,6 @@
 package me.studentservice.model;
 
-public class Student {
+public class TableStudentData {
 
 	private int id;
 	private int classId;
@@ -13,10 +13,10 @@ public class Student {
 	private String mother;
 	private String gpa;
 	private String previousGpa;
+	private String homeroom;
+	private String schoolClass;
 
-	public Student() {}
-
-	public Student(int id, int classId, String name, String surname, String gender, String birthDate, String address, String father, String mother, String gpa, String previousGpa) {
+	public TableStudentData(int id, int classId, String name, String surname, String gender, String birthDate, String address, String father, String mother, String gpa, String previousGpa, String homeroom, String schoolClass) {
 		this.id = id;
 		this.classId = classId;
 		this.name = name;
@@ -28,6 +28,8 @@ public class Student {
 		this.mother = mother;
 		this.gpa = gpa;
 		this.previousGpa = previousGpa;
+		this.homeroom = homeroom;
+		this.schoolClass = schoolClass;
 	}
 
 	public int getId() {
@@ -118,9 +120,25 @@ public class Student {
 		this.previousGpa = previousGpa;
 	}
 
+	public String getHomeroom() {
+		return homeroom;
+	}
+
+	public void setHomeroom(String homeroom) {
+		this.homeroom = homeroom;
+	}
+
+	public String getSchoolClass() {
+		return schoolClass;
+	}
+
+	public void setSchoolClass(String schoolClass) {
+		this.schoolClass = schoolClass;
+	}
+
 	@Override
 	public String toString() {
-		return "Student{" +
+		return "TableStudent{" +
 				"id=" + id +
 				", classId=" + classId +
 				", name='" + name + '\'' +
@@ -132,6 +150,8 @@ public class Student {
 				", mother='" + mother + '\'' +
 				", gpa=" + gpa +
 				", previousGpa='" + previousGpa + '\'' +
+				", homeroom='" + homeroom + '\'' +
+				", schoolClass='" + schoolClass + '\'' +
 				'}';
 	}
 

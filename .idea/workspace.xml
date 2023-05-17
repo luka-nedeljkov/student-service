@@ -1,26 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Student Service:jar2" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e66ce8e4-a6f5-421b-9759-e4d3dd67ef6f" name="Changes" comment="">
+    <list default="true" id="e66ce8e4-a6f5-421b-9759-e4d3dd67ef6f" name="Changes" comment="+ Finalized everything except certificate">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/model/SchoolClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/model/Subject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/model/TableStudentData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/ui/controller/StudentInputDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/me/studentservice/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/me/studentservice/ui/fxml/Insert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Student_Service_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/model/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/ui/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/ui/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/ui/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/studentservice/utils/SQLUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/studentservice/utils/SQLUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/me/studentservice/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/me/studentservice/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/me/studentservice/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/me/studentservice/ui/fxml/Main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2PplpiW2GasC2nTpyWw1qRE1Qq5" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -28,9 +60,34 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Programming and School/Java/Block Projects/Chess",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programming and School\Java\Block Projects\Student Service\src\main\resources\me\studentservice\assets" />
+      <recent name="D:\Programming and School\Java\Block Projects\Student Service\src\main\resources" />
+      <recent name="D:\Programming and School\Java\Block Projects\Student Service\src\main\resources\me\studentservice\ui\fxml" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="me.studentservice.Launcher" />
+      <module name="Student Service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -39,7 +96,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684162090173</updated>
-      <workItem from="1684162091443" duration="2000" />
+      <workItem from="1684162091443" duration="618000" />
+      <workItem from="1684162949140" duration="25000" />
+      <workItem from="1684162989109" duration="70000" />
+      <workItem from="1684163077464" duration="17000" />
+      <workItem from="1684163239541" duration="38000" />
+      <workItem from="1684163329093" duration="26000" />
+      <workItem from="1684163493734" duration="15000" />
+      <workItem from="1684164463719" duration="867000" />
+      <workItem from="1684165458636" duration="1190000" />
+      <workItem from="1684173650559" duration="4609000" />
+      <workItem from="1684230944855" duration="4693000" />
+      <workItem from="1684235987564" duration="685000" />
+      <workItem from="1684236690050" duration="17444000" />
+      <workItem from="1684323989761" duration="4454000" />
     </task>
     <servers />
   </component>
@@ -56,5 +126,23 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="+ Finalized everything except certificate" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ Finalized everything except certificate" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLException" package="java.sql" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
