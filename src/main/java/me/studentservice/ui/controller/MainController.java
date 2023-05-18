@@ -177,7 +177,6 @@ public class MainController implements Initializable {
 				}
 			}
 			sql.append(";");
-			System.out.println(sql);
 			ResultSet rs = sqlUtils.exequteSelectQuery(sql.toString());
 			ObservableList<TableStudentData> list = FXCollections.observableArrayList();
 			while(rs.next()) {
