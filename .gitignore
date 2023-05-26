@@ -4,6 +4,7 @@ out/
 !**/src/main/**/target/
 !**/src/test/**/target/
 Potvrda.png
+*.db
 
 ### IntelliJ IDEA ###
 .idea/

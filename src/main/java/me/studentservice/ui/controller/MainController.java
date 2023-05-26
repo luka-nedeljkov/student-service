@@ -83,7 +83,7 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		sqlUtils = new SQLUtils();
+		sqlUtils = SQLUtils.getInstance();
 
 		logo.setImage(new Image(getClass().getResourceAsStream("/me/studentservice/assets/logo.png")));
 
@@ -241,7 +241,7 @@ public class MainController implements Initializable {
 		Optional<Student> optionalStudent = dialog.showAndWait();
 		if(optionalStudent.isPresent()) {
 			Student student = optionalStudent.get();
-			sqlUtils.executeQuery("INSERT INTO student_service.student VALUES " +
+			sqlUtils.executeQuery("INSERT INTO student VALUES " +
 					"(" + student.getId() + ", " + student.getClassId() + ", '" + student.getName() +
 					"', '" + student.getSurname() + "', '" + student.getGender() + "', '" + student.getBirthDate() +
 					"', '" + student.getAddress() + "', '" + student.getFather() + "', '" + student.getMother() +
@@ -278,6 +278,7 @@ public class MainController implements Initializable {
 					rs.getString(10),
 					rs.getString(11)
 			);
+			sqlUtils.disconnect();
 		} catch(SQLException se) {
 			se.printStackTrace();
 		}

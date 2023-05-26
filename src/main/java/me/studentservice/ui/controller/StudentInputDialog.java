@@ -87,7 +87,7 @@ public class StudentInputDialog extends Dialog<Student> implements Initializable
 		gender.getItems().add("NB");
 		gender.getItems().add("/");
 		gender.getSelectionModel().select(0);
-		sqlUtils = new SQLUtils();
+		sqlUtils = SQLUtils.getInstance();
 		initClass();
 	}
 
